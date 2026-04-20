@@ -1,0 +1,7 @@
+{
+  "cli_name": "github",
+  "openapi_hash": "329a30f37bfac4c331be8dd5191746fb9ed8ff1cb1c7d70c4fd705e374f07209",
+  "generated_at": "2026-04-17T13:06:48Z",
+  "climate_version": "0.1.0",
+  "spec_source": "https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json"
+}
