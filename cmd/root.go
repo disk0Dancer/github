@@ -6,6 +6,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+
+	cfg "github/internal/config"
 )
 
 var (
@@ -13,7 +15,7 @@ var (
 	baseURL      string
 )
 
-const defaultBaseURL = "https://api.github.com"
+const defaultBaseURLTemplate = "https://api.github.com"
 
 var version = "1.1.4"
 
@@ -37,14 +39,34 @@ func getBaseURL() string {
 	if baseURL != "" {
 		return baseURL
 	}
+	if v := getConfigValue("core.base_url"); v != "" {
+		return v
+	}
 	if v := os.Getenv("GITHUB_BASE_URL"); v != "" {
 		return v
 	}
-	return defaultBaseURL
+	return resolveDefaultBaseURL()
+}
+
+func resolveDefaultBaseURL() string {
+	return defaultBaseURLTemplate
+
+}
+
+func getConfigValue(key string) string {
+	store, err := cfg.Load()
+	if err != nil {
+		return ""
+	}
+	value, ok := store.Get(key)
+	if !ok {
+		return ""
+	}
+	return value
 }
 
 // getAuthHeaders returns HTTP headers required for authentication.
-// Priority: CLI flag → environment variable → empty.
+// Priority: CLI flag -> config -> environment variable -> empty.
 func getAuthHeaders() map[string]string {
 	headers := map[string]string{}
 
@@ -69,6 +91,11 @@ func writeOutput(v interface{}) {
 	}
 }
 
+// writeJSON prints v as indented JSON to stdout.
+func writeJSON(v interface{}) {
+	writeOutput(v)
+}
+
 // exitWithError prints an error as JSON to stderr and exits non-zero.
 func exitWithError(statusCode int, code, message string, raw interface{}) {
 	type errObj struct {
@@ -86,3 +113,4 @@ func exitWithError(statusCode int, code, message string, raw interface{}) {
 	_ = enc.Encode(obj)
 	os.Exit(1)
 }
+
