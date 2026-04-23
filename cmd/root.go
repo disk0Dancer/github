@@ -113,4 +113,3 @@ func exitWithError(statusCode int, code, message string, raw interface{}) {
 	_ = enc.Encode(obj)
 	os.Exit(1)
 }
-

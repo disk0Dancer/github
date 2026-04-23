@@ -8,13 +8,12 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/spf13/cobra"
 	cfg "github/internal/config"
 	eventlistener "github/internal/events"
-	"github.com/spf13/cobra"
 )
 
-var generatedEventDefinitions = []eventlistener.EventDefinition{
-}
+var generatedEventDefinitions = []eventlistener.EventDefinition{}
 
 var (
 	eventsListenHost               string
@@ -31,16 +30,16 @@ var (
 	eventsListenTimestampHeader    string
 	eventsListenTimestampTolerance int
 
-	eventsEmitTargetURL           string
-	eventsEmitMethod              string
-	eventsEmitDataJSON            string
-	eventsEmitDataFile            string
-	eventsEmitSignatureMode       string
-	eventsEmitSignatureHeader     string
-	eventsEmitSigningSecret       string
-	eventsEmitSignatureAlgorithm  string
-	eventsEmitIncludeTimestamp    bool
-	eventsEmitTimestampHeader     string
+	eventsEmitTargetURL          string
+	eventsEmitMethod             string
+	eventsEmitDataJSON           string
+	eventsEmitDataFile           string
+	eventsEmitSignatureMode      string
+	eventsEmitSignatureHeader    string
+	eventsEmitSigningSecret      string
+	eventsEmitSignatureAlgorithm string
+	eventsEmitIncludeTimestamp   bool
+	eventsEmitTimestampHeader    string
 )
 
 var eventsCmd = &cobra.Command{
@@ -259,12 +258,12 @@ var eventsEmitCmd = &cobra.Command{
 		}
 
 		headers, err := eventlistener.SignatureHeaders(eventlistener.SignatureOptions{
-			Mode:               signatureMode,
-			Header:             signatureHeader,
-			Secret:             signingSecret,
-			Algorithm:          signatureAlgorithm,
-			IncludeTimestamp:   includeTimestamp,
-			TimestampHeader:    timestampHeader,
+			Mode:             signatureMode,
+			Header:           signatureHeader,
+			Secret:           signingSecret,
+			Algorithm:        signatureAlgorithm,
+			IncludeTimestamp: includeTimestamp,
+			TimestampHeader:  timestampHeader,
 		}, payload)
 		if err != nil {
 			return err

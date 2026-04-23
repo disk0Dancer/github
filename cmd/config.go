@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	cfg "github/internal/config"
 	"github.com/spf13/cobra"
+	cfg "github/internal/config"
 )
 
 var configSetSecret bool
@@ -29,9 +29,9 @@ var configListCmd = &cobra.Command{
 			Secret bool   `json:"secret"`
 		}
 		type resp struct {
-			Path         string  `json:"path"`
-			Active       string  `json:"active_profile"`
-			Entries      []entry `json:"entries"`
+			Path    string  `json:"path"`
+			Active  string  `json:"active_profile"`
+			Entries []entry `json:"entries"`
 		}
 
 		masked := store.MaskedEntries()

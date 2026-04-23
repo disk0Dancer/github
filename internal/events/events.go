@@ -116,16 +116,16 @@ type ErrorRecord struct {
 
 // EventRecord captures one incoming webhook request.
 type EventRecord struct {
-	Type          string              `json:"type"`
-	Name          string              `json:"name,omitempty"`
-	Method        string              `json:"method"`
-	Path          string              `json:"path"`
-	Query         string              `json:"query,omitempty"`
-	Headers       map[string][]string `json:"headers,omitempty"`
-	Body          interface{}         `json:"body,omitempty"`
-	BodyRaw       string              `json:"body_raw,omitempty"`
-	Verified      bool                `json:"verified"`
-	ReceivedAt    string              `json:"received_at"`
+	Type       string              `json:"type"`
+	Name       string              `json:"name,omitempty"`
+	Method     string              `json:"method"`
+	Path       string              `json:"path"`
+	Query      string              `json:"query,omitempty"`
+	Headers    map[string][]string `json:"headers,omitempty"`
+	Body       interface{}         `json:"body,omitempty"`
+	BodyRaw    string              `json:"body_raw,omitempty"`
+	Verified   bool                `json:"verified"`
+	ReceivedAt string              `json:"received_at"`
 }
 
 // Listener is a local webhook listener.
